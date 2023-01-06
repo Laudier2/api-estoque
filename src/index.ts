@@ -5,11 +5,11 @@ import { router } from "./routes/routes";
 
 const app = express();
 
-const port = process.env.APP_PORT || 3002
+const port = process.env.APP_PORT || 3003
 
 app.use(express.json());
 app.use(router);
 app.use(config);
 app.use(cors());
 
-app.listen(port, () => console.log("Server na URL http://localhost:", port));
+app.listen(port, () => console.log(`Server na URL http://localhost:${port}`));

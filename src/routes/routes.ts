@@ -52,7 +52,7 @@ const loginUser = new ControllerLogin()
 
 router.post("/user", createUser.handle);
 router.post("/login", loginUser.handle);
-router.use(authUser.handle);
+//router.use(authUser.handle);
 router.put("/user", updateUser.handle);
 router.delete("/user", deleteUser.handle);
 router.get("/user", findUser.handle);
