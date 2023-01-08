@@ -11,22 +11,42 @@ export class FindProductController {
 }
 
 export class controllerProductCategory {
-    async handle(request: Request, response: Response) {
-      const { id } = request.body;
-  
-      const Dell = await prismaClient.products.findMany({
-        where: {
-          id: id
-        },
-        include: {
-            products_categories: {
-              include: {
-                categories: true
-              }
+  async handle(request: Request, response: Response) {
+    const { id } = request.body;
+    const Dell = await prismaClient.products.findMany({
+      where: {
+        id: id
+      },
+      include: {
+          products_categories: {
+            include: {
+              categories: true
             }
-        }
-      });
-      
-      return response.json(Dell);
-    }
+          }
+      }
+    });
+    
+    return response.json(Dell);
   }
+}
+
+export class controllerProductId {
+  async handle(request: Request, response: Response) {
+    const { id } = request.params;
+
+    const Dell = await prismaClient.products.findUnique({
+      where: {
+        id: id
+      },
+      include: {
+          products_categories: {
+            include: {
+              categories: true
+            }
+          }
+      }
+    });
+    
+    return response.json(Dell);
+  }
+}

@@ -5,23 +5,23 @@ const prisma = new PrismaClient()
 
 export class ControllerFind {
   async handle(request: Request, response: Response) {
-    const { name, email, password, phone, street, city, number, cep, state } = request.body;
+    const { id } = request.body;
 
-    const user = await prisma.user.findFirst({
+    const user = await prisma.user.findMany({
       where: {
-        name,
-        email,
-        password,
-        phone,
-        street,
-        city,
-        number,
-        cep,
-        state
+        id
+      },
+      include: {
+        RelationsAdress: {
+          include: {
+            adress2: true
+          }
+
+        }
       }
     })
 
-    return user
+    return response.status(200).send(user)
 
   }
 }

@@ -16,3 +16,17 @@ export class controllerDelete {
     return response.json({msg: "Usuario deletado com sucesso!", user});
   }
 }
+
+export class controllerDeleteRelation {
+  async handle(request: Request, response: Response) {
+    const { id } = request.body;
+
+    const user = await prisma.relationsAdress.delete({     
+        where: {
+          id: id
+        }
+      })
+
+    return response.json({msg: "Usuario deletado com sucesso!", user});
+  }
+}

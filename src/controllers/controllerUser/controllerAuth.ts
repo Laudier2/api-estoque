@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import * as jwt from "jsonwebtoken";
 import { PrismaClient } from "@prisma/client";
-import console from "console";
 
 const prisma = new PrismaClient()
 
@@ -15,7 +14,7 @@ export class ControllerAuth {
     const { authorization } = request.headers;
 
     if(!authorization){
-      return response.status(401).json({ message: `Token invalido, você não esta autorizado`})
+      return response.status(401).json({ message: `Token invalido, você não esta autorizado ${authorization}`})
       //return console.log("Token invalido, você não esta autorizado")
     }
 

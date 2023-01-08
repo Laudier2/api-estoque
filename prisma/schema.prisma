@@ -14,16 +14,44 @@ model User {
   email    String  @unique
   password String
 
-  street String
-  city   String
-  state  String
-  cep    String
-  number Decimal
+  street             String
+  city               String
+  state              String
+  cep                String
+  number             Decimal
+  district           String
+  apartment_or_house String
 
-  created_at DateTime @default(now())
-  update_at  DateTime @default(now())
+  created_at      DateTime          @default(now())
+  update_at       DateTime          @default(now())
+  RelationsAdress RelationsAdress[]
 
   @@map("users")
+}
+
+model Adress2 {
+  id                 String   @id @default(uuid())
+  street             String?
+  city               String?
+  state              String?
+  cep                String?
+  number             Decimal?
+  district           String?
+  apartment_or_house String?
+
+  created_at      DateTime          @default(now())
+  update_at       DateTime          @default(now())
+  RelationsAdress RelationsAdress[]
+
+  @@map("adresses2")
+}
+
+model RelationsAdress {
+  id        String  @id @default(uuid())
+  id_user   String
+  id_adress String
+  user      User    @relation(fields: [id_user], references: [id])
+  adress2   Adress2 @relation(fields: [id_adress], references: [id])
 }
 
 model categories {
