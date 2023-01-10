@@ -7,7 +7,7 @@ export class UserParamesId {
 
         const user = await prismaClient.user.findUnique({
             where: {
-                id
+                id: id
             }
         })
 

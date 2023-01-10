@@ -8,8 +8,8 @@ const app = express();
 const port = process.env.APP_PORT || 3003
 
 app.use(express.json());
+app.use(cors());
 app.use(router);
 app.use(config);
-app.use(cors());
 
 app.listen(port, () => console.log(`Server na URL http://localhost:${port}`));
