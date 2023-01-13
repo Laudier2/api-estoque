@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 
 export class controllerDelete {
   async handle(request: Request, response: Response) {
-    const { id } = request.body;
+    const id = request.params.id;
 
     const user = await prisma.user.delete({     
         where: {
@@ -19,7 +19,7 @@ export class controllerDelete {
 
 export class controllerDeleteRelation {
   async handle(request: Request, response: Response) {
-    const { id } = request.body;
+    const { id } = request.params;
 
     const user = await prisma.relationsAdress.delete({     
         where: {

@@ -33,7 +33,7 @@ const findProductCategoryId = new controllerProductId();
 router.post("/product", createProduct.handle);
 router.get("/product", findProduct.handle);
 router.get("/productcategory", findProductCategory.handle);
-router.get("/productcategoryid:id", findProductCategoryId.handle);
+router.get("/productcategoryid/:id", findProductCategoryId.handle);
 
 /*=================================== ROTA DE CATEGORY =============================*/
 router.post("/category", createCategory.handle);
@@ -52,7 +52,7 @@ const deleteUser = new controllerDelete()
 const deleteAdress2 = new controllerDeleteRelation()
 const updateUser = new controllerUpdate()
 const updateUserAdress2 = new ControllerAdress2()
-//const authUser = new ControllerAuth()
+const authUser = new ControllerAuth()
 const loginUser = new ControllerLogin()
 
 /* ============================= ROTAS DE ACESSO =============================== */
@@ -60,11 +60,11 @@ const loginUser = new ControllerLogin()
 router.post("/user", createUser.handle);
 router.post("/adress2", createAdress2.handle);
 router.post("/login", loginUser.handle);
-//router.use(authUser.handle);
+router.use(authUser.handle);
 router.put("/user", updateUser.handle);
 router.put("/useradress2put", updateUserAdress2.handle);
-router.delete("/user", deleteUser.handle);
-router.delete("/adress2", deleteAdress2.handle);
+router.delete("/user/:id", deleteUser.handle);
+router.delete("/adress2/:id", deleteAdress2.handle);
 router.get("/user", findUser.handle);
-router.get("/user:id", findUserId.handle);
+router.get("/user/:id", findUserId.handle);
 export { router };
