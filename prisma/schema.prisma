@@ -13,6 +13,7 @@ model User {
   phone    String
   email    String @unique
   password String
+  image    String
 
   street             String
   city               String
@@ -52,33 +53,39 @@ model RelationsAdress {
   id_adress String
   user      User    @relation(fields: [id_user], references: [id])
   adress2   Adress2 @relation(fields: [id_adress], references: [id])
+
+  @@map("relationsAdress2")
 }
 
-model categories {
-  id                  String                @id @default(uuid())
+model Category {
+  id                  String             @id @default(uuid())
   name                String
-  products_categories products_categories[]
+  products_categories Product_Category[]
+
+  @@map("categories")
 }
 
-model products {
-  id                  String                @id @default(uuid())
+model Product {
+  id                  String             @id @default(uuid())
   name                String
-  bar_code            String                @unique
+  bar_code            String             @unique
   price               String
-  imagem              String[]
+  image               String[]
   size                String[]
   color               String[]
-  slug                String                @unique
+  slug                String             @unique
   description         String
   quantity            String
-  created_at          DateTime              @default(now())
-  products_categories products_categories[]
+  created_at          DateTime           @default(now())
+  products_categories Product_Category[]
 }
 
-model products_categories {
-  id          String     @id @default(uuid())
+model Product_Category {
+  id          String   @id @default(uuid())
   id_product  String
   id_category String
-  categories  categories @relation(fields: [id_category], references: [id])
-  products    products   @relation(fields: [id_product], references: [id])
+  categories  Category @relation(fields: [id_category], references: [id])
+  products    Product  @relation(fields: [id_product], references: [id])
+
+  @@map("product_categories")
 }

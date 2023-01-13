@@ -21,7 +21,7 @@ export class ControllerFind {
       }
     })
 
-    return response.status(200).send(user)
+    return response.status(404).json(user ? user : "Usuario not found")
 
   }
 }

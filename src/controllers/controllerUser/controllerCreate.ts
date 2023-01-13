@@ -4,7 +4,7 @@ import * as bcrypt from "bcrypt";
 
 export class ControllerCreate {
   async handle(request: Request, response: Response) {
-    const { name, email, password, phone, city, cep, street, state, number, district, apartment_or_house } = request.body;
+    const { name, email, password, phone, city, cep, street, image, state, number, district, apartment_or_house } = request.body;
 
     const cryptPass = await bcrypt.hash(password, 8)
 
@@ -13,6 +13,7 @@ export class ControllerCreate {
         email,
         name,
         phone,
+        image,
         password: cryptPass,
         district, 
         apartment_or_house, 

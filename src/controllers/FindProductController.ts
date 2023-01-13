@@ -4,7 +4,7 @@ import { prismaClient } from "../database/prismaClient";
 export class FindProductController {
   async handle(request: Request, response: Response) {
 
-    const product = await prismaClient.products.findMany({});
+    const product = await prismaClient.product.findMany({});
 
     return response.json(product);
   }
@@ -13,7 +13,7 @@ export class FindProductController {
 export class controllerProductCategory {
   async handle(request: Request, response: Response) {
     const { id } = request.body;
-    const Dell = await prismaClient.products.findMany({
+    const Dell = await prismaClient.product.findMany({
       where: {
         id: id
       },
@@ -34,7 +34,7 @@ export class controllerProductId {
   async handle(request: Request, response: Response) {
     const { id } = request.params;
 
-    const Dell = await prismaClient.products.findUnique({
+    const Dell = await prismaClient.product.findUnique({
       where: {
         id: id
       },

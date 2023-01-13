@@ -1,12 +1,14 @@
+import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 import { prismaClient } from "../database/prismaClient";
 
+const prisma = new PrismaClient()
+
 export class FindCategoryController {
   async handle(request: Request, response: Response) {
-    const { id } = request.params;
+  
+    const category = await prisma.category.findMany({})
 
-    const category = await prismaClient.categories.findMany ({});
-
-    return response.json(category);
+    return response.status(200).json(category);
   }
 }

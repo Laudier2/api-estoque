@@ -11,12 +11,12 @@ export class CreateProductController {
       size,
       color,
       description,
-      imagem,
+      image,
       quantity,
       slug
     } = request.body;
 
-    const product = await prisma.products.create ({
+    const product = await prisma.product.create ({
       data: {
         name,
         price,
@@ -24,7 +24,7 @@ export class CreateProductController {
         size,
         color,
         description,
-        imagem,
+        image,
         quantity,
         slug
       },

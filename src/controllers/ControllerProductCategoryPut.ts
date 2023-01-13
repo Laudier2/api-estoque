@@ -3,9 +3,9 @@ import { prismaClient } from "../database/prismaClient";
 
 export class CreateProductWithExistCategoryPut {
   async handle(request: Request, response: Response) {
-    const { id, name, price, bar_code, color, size, quantity, description, imagem, slug, id_category } = request.body;
+    const { id, name, price, bar_code, color, size, quantity, description, image, slug, id_category } = request.body;
 
-    const product = await prismaClient.products.update({
+    const product = await prismaClient.product.update({
       where: {
         id
       },
@@ -17,7 +17,7 @@ export class CreateProductWithExistCategoryPut {
         size,
         quantity,
         description,
-        imagem,
+        image,
         slug
       }
     });

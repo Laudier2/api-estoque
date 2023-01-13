@@ -5,6 +5,7 @@ CREATE TABLE "users" (
     "phone" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
+    "image" TEXT NOT NULL,
     "street" TEXT NOT NULL,
     "city" TEXT NOT NULL,
     "state" TEXT NOT NULL,
@@ -35,12 +36,12 @@ CREATE TABLE "adresses2" (
 );
 
 -- CreateTable
-CREATE TABLE "RelationsAdress" (
+CREATE TABLE "relationsAdress2" (
     "id" TEXT NOT NULL,
     "id_user" TEXT NOT NULL,
     "id_adress" TEXT NOT NULL,
 
-    CONSTRAINT "RelationsAdress_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "relationsAdress2_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -52,12 +53,12 @@ CREATE TABLE "categories" (
 );
 
 -- CreateTable
-CREATE TABLE "products" (
+CREATE TABLE "Product" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "bar_code" TEXT NOT NULL,
     "price" TEXT NOT NULL,
-    "imagem" TEXT[],
+    "image" TEXT[],
     "size" TEXT[],
     "color" TEXT[],
     "slug" TEXT NOT NULL,
@@ -65,35 +66,35 @@ CREATE TABLE "products" (
     "quantity" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "products_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Product_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "products_categories" (
+CREATE TABLE "product_categories" (
     "id" TEXT NOT NULL,
     "id_product" TEXT NOT NULL,
     "id_category" TEXT NOT NULL,
 
-    CONSTRAINT "products_categories_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "product_categories_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "products_bar_code_key" ON "products"("bar_code");
+CREATE UNIQUE INDEX "Product_bar_code_key" ON "Product"("bar_code");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "products_slug_key" ON "products"("slug");
+CREATE UNIQUE INDEX "Product_slug_key" ON "Product"("slug");
 
 -- AddForeignKey
-ALTER TABLE "RelationsAdress" ADD CONSTRAINT "RelationsAdress_id_user_fkey" FOREIGN KEY ("id_user") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "relationsAdress2" ADD CONSTRAINT "relationsAdress2_id_user_fkey" FOREIGN KEY ("id_user") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "RelationsAdress" ADD CONSTRAINT "RelationsAdress_id_adress_fkey" FOREIGN KEY ("id_adress") REFERENCES "adresses2"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "relationsAdress2" ADD CONSTRAINT "relationsAdress2_id_adress_fkey" FOREIGN KEY ("id_adress") REFERENCES "adresses2"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "products_categories" ADD CONSTRAINT "products_categories_id_category_fkey" FOREIGN KEY ("id_category") REFERENCES "categories"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "product_categories" ADD CONSTRAINT "product_categories_id_category_fkey" FOREIGN KEY ("id_category") REFERENCES "categories"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "products_categories" ADD CONSTRAINT "products_categories_id_product_fkey" FOREIGN KEY ("id_product") REFERENCES "products"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "product_categories" ADD CONSTRAINT "product_categories_id_product_fkey" FOREIGN KEY ("id_product") REFERENCES "Product"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

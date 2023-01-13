@@ -5,7 +5,7 @@ export class CreateCategoryController {
   async handle(request: Request, response: Response) {
     const { name } = request.body;
 
-    const category = await prismaClient.categories.create({
+    const category = await prismaClient.category.create({
       data: {
         name,
       },
