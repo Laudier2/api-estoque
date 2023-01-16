@@ -11,6 +11,6 @@ export class UserParamesId {
             }
         })
 
-        return response.status(404).json(user ? user : "Usuario not found")
+        return response.status(200).json(user)
     }
 }
