@@ -43,7 +43,7 @@ export class controllerUpdate {
       }
     })
     
-    return response.status(201).json(user)
+    return !!response ? user : console.log("Ouve um erro")
   }
 }
 
