@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(uuid())
+  name     String
+  phone    String
+  email    String @unique
+  password String
+  image    String
+
+  street             String
+  city               String
+  state              String
+  cep                String
+  number1            String
+  district           String
+  apartment_or_house String
+
+  created_at      DateTime          @default(now())
+  update_at       DateTime          @default(now())
+  RelationsAdress RelationsAdress[]
+
+  @@map("users")
+}
+
+model Adress2 {
+  id                 String  @id @default(uuid())
+  street             String?
+  city               String?
+  state              String?
+  cep                String?
+  number2            String?
+  district           String?
+  apartment_or_house String?
+
+  created_at      DateTime          @default(now())
+  update_at       DateTime          @default(now())
+  RelationsAdress RelationsAdress[]
+
+  @@map("adresses2")
+}
+
+model RelationsAdress {
+  id        String  @id @default(uuid())
+  id_user   String
+  id_adress String
+  user      User    @relation(fields: [id_user], references: [id])
+  adress2   Adress2 @relation(fields: [id_adress], references: [id])
+
+  @@map("relationsAdress2")
+}
+
+model Category {
+  id                  String             @id @default(uuid())
+  name                String
+  products_categories Product_Category[]
+
+  @@map("categories")
+}
+
+model Product {
+  id                  String             @id @default(uuid())
+  name                String
+  bar_code            String             @unique
+  price               String
+  image               String[]
+  size                String[]
+  color               String[]
+  slug                String             @unique
+  description         String
+  quantity            String
+  created_at          DateTime           @default(now())
+  products_categories Product_Category[]
+}
+
+model Product_Category {
+  id          String   @id @default(uuid())
+  id_product  String
+  id_category String
+  categories  Category @relation(fields: [id_category], references: [id])
+  products    Product  @relation(fields: [id_product], references: [id])
+
+  @@map("product_categories")
+}
