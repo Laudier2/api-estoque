@@ -18,13 +18,13 @@ export class ControllerLogin {
     const message = { errr: "E-mail ou senha invalida"}
 
     if(!user){
-       return console.log(message.errr)
+       return response.status(400).json(message.errr)
     } 
 
     const verifyPass = await bcrypt.compare(password, user.password)
 
     if(!verifyPass){
-      return message.errr;
+      return response.status(400).json(message.errr);
     }
 
     const token = jwt.sign({ id: user.id }, process.env.APP_KEY ?? '', {

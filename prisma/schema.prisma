@@ -19,7 +19,7 @@ model User {
   city               String
   state              String
   cep                String
-  number             String
+  number1            String
   district           String
   apartment_or_house String
 
@@ -36,7 +36,7 @@ model Adress2 {
   city               String?
   state              String?
   cep                String?
-  number             String?
+  number2            String?
   district           String?
   apartment_or_house String?
 

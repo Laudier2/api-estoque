@@ -13,7 +13,8 @@ export class FindProductController {
 export class controllerProductCategory {
   async handle(request: Request, response: Response) {
     const { id } = request.body;
-    const Dell = await prismaClient.product.findMany({
+
+    const User = await prismaClient.product.findMany({
       where: {
         id: id
       },
@@ -26,7 +27,7 @@ export class controllerProductCategory {
       }
     });
     
-    return response.json(Dell);
+    return response.json(User);
   }
 }
 
@@ -34,7 +35,19 @@ export class controllerProductId {
   async handle(request: Request, response: Response) {
     const { id } = request.params;
 
-    const Dell = await prismaClient.product.findUnique({
+    const userExists = await prismaClient.product.findUnique({
+      where: {
+        id: id
+      }
+    })
+
+    if(!userExists){
+      return response.status(400).json({
+        msg: `Esse id: ${id} não estar vinculado a nem uma produto, tente outro!`
+      })
+    } 
+
+    const User = await prismaClient.product.findUnique({
       where: {
         id: id
       },
@@ -47,6 +60,6 @@ export class controllerProductId {
       }
     });
     
-    return response.json(Dell);
+    return response.status(200).json(User);
   }
 }

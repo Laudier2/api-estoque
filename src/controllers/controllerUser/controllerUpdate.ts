@@ -17,11 +17,62 @@ export class controllerUpdate {
       street, 
       city, 
       cep, 
-      number, 
+      number1, 
       state 
     } = request.body;
 
     const cryptPass = await bcrypt.hash(password, 8)
+
+    const userExists = await prisma.user.findUnique({
+      where: {
+        email: email
+      }
+    })
+
+    if(userExists){
+      return response.status(400).json({
+        msg: `O email ${email} já existe!`
+      })
+    } 
+
+   
+    if(
+      typeof number1 === 'number' || 
+      typeof phone === 'number' || 
+      typeof cep === 'number' || 
+      typeof password === 'number' ||
+      typeof name === 'number' || 
+      typeof email === 'number' ||
+      typeof state === 'number' ||
+      typeof street === 'number' ||
+      typeof apartment_or_house === 'number' ||
+      typeof district === 'number' ||
+      typeof city === 'number' ||
+      typeof image === 'number'
+    ){
+      return response.status(500).json({
+        msg: `Algum campo esta faltando ou estão em números! Lembre-se que, todos os campos tem que estar em string ok!`
+      })
+    }  
+
+    if(
+        typeof number1 === 'undefined' || 
+        typeof phone === 'undefined' || 
+        typeof cep === 'undefined' || 
+        typeof password === 'undefined' ||
+        typeof name === 'undefined' || 
+        typeof email === 'undefined' ||
+        typeof state === 'undefined' ||
+        typeof street === 'undefined' ||
+        typeof apartment_or_house === 'undefined' ||
+        typeof district === 'undefined' ||
+        typeof city === 'undefined' ||
+        typeof image === 'undefined'
+    ){
+      return response.status(500).json({
+        msg: `Algum campo esta faltando! E lembre-se que todos os campos tem que ser string ok!`
+      })
+    }   
 
     const user = await prisma.user.update({
       where: {
@@ -38,12 +89,12 @@ export class controllerUpdate {
         street, 
         city, 
         cep, 
-        number, 
+        number1, 
         state 
       }
     })
     
-    return !!response ? user : console.log("Ouve um erro")
+    return response.status(201).json(user)
   }
 }
 
@@ -57,7 +108,7 @@ export class controllerUpdateAdress {
       street, 
       city, 
       cep, 
-      number, 
+      number2, 
       state,
       id_user
     } = request.body;
@@ -74,7 +125,7 @@ export class controllerUpdateAdress {
             street, 
             city, 
             cep, 
-            number, 
+            number2, 
             state 
           }
         },
