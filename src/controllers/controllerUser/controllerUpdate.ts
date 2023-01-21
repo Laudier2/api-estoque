@@ -23,15 +23,9 @@ export class controllerUpdate {
 
     const cryptPass = await bcrypt.hash(password, 8)
 
-    const userExists = await prisma.user.findUnique({
-      where: {
-        email: email
-      }
-    })
-
-    if(userExists){
+    if(typeof id === "undefined"){
       return response.status(400).json({
-        msg: `O email ${email} já existe!`
+        msg: `O id: ${id === undefined ? "Você não inserio nem um id!" : id} não existe, ou não esta vinculado a nem um usuário, tente outro!`
       })
     } 
 

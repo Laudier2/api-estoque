@@ -1,3 +1,6 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,13 +11,12 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
-  name     String
-  phone    String
-  email    String @unique
-  password String
-  image    String
-
+  id                 String            @id @default(uuid())
+  name               String
+  phone              String
+  email              String            @unique
+  password           String
+  image              String
   street             String
   city               String
   state              String
@@ -22,16 +24,15 @@ model User {
   number1            String
   district           String
   apartment_or_house String
-
-  created_at      DateTime          @default(now())
-  update_at       DateTime          @default(now())
-  RelationsAdress RelationsAdress[]
+  created_at         DateTime          @default(now())
+  update_at          DateTime          @default(now())
+  RelationsAdress    RelationsAdress[]
 
   @@map("users")
 }
 
 model Adress2 {
-  id                 String  @id @default(uuid())
+  id                 String            @id @default(uuid())
   street             String?
   city               String?
   state              String?
@@ -39,10 +40,9 @@ model Adress2 {
   number2            String?
   district           String?
   apartment_or_house String?
-
-  created_at      DateTime          @default(now())
-  update_at       DateTime          @default(now())
-  RelationsAdress RelationsAdress[]
+  created_at         DateTime          @default(now())
+  update_at          DateTime          @default(now())
+  RelationsAdress    RelationsAdress[]
 
   @@map("adresses2")
 }

@@ -33,7 +33,7 @@ export class controllerDeleteRelation {
   async handle(request: Request, response: Response) {
     const { id } = request.params;
 
-    const idExists = await prisma.user.findUnique({
+    const idExists = await prisma.relationsAdress.findUnique({
       where: {
         id: id
       }

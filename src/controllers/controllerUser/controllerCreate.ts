@@ -82,7 +82,55 @@ export class ControllerCreate {
 
 export class ControllerAdress2 {
   async handle(request: Request, response: Response) {
-    const { city, cep, street, state, number, district, apartment_or_house, id_user } = request.body;
+    const { city, cep, street, state, number2, district, apartment_or_house, id_user, id } = request.body;
+
+    const userExists = await prismaClient.user.findUnique({
+      where: {
+        id: id_user
+      }
+    })
+
+    if(!userExists){
+      return response.status(400).json({
+        msg: `O id inserido não é um id valido, ou você não inserio nem um id de usuario cadastrado! Tente outro!`
+      })
+    }
+
+    if(typeof id_user === 'undefined'){
+      return response.status(400).json({
+        msg: `Você não inserio nem um id de usuario cadastrado! Tente outro!`
+      })
+    }
+    
+    if(
+      typeof number2 === 'number' || 
+      typeof cep === 'number' || 
+      typeof state === 'number' ||
+      typeof street === 'number' ||
+      typeof apartment_or_house === 'number' ||
+      typeof district === 'number' ||
+      typeof city === 'number' ||
+      typeof id_user === 'number' 
+    ){
+      return response.status(501).json({
+        msg: `Lembre-se que, todos os campos tem que estar em string ok!`
+      })
+    }  
+
+    if(
+        typeof cep === 'undefined' || 
+        typeof state === 'undefined' ||
+        typeof street === 'undefined' ||
+        typeof apartment_or_house === 'undefined' ||
+        typeof district === 'undefined' ||
+        typeof city === 'undefined' || 
+        typeof number2 === 'undefined' ||
+        typeof id_user === 'undefined' 
+    ){
+      return response.status(500).json({
+        msg: `Algum campo esta faltando!`
+      })
+    }   
 
     const adress = await prismaClient.relationsAdress.create({
       data: {
@@ -93,7 +141,7 @@ export class ControllerAdress2 {
             street, 
             city, 
             cep, 
-            number, 
+            number2, 
             state
           }
         },
@@ -104,6 +152,7 @@ export class ControllerAdress2 {
         }
       }
     })
+    
     return response.status(201).json({ message: 'Adress2 create susserful ', adress})
   }
 }
