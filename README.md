@@ -3,7 +3,7 @@
 </center>
 </h1>
 
-<h2 align="center">LIKN na heroku <a href="https://api-estoque.herokuapp.com/" target="_blank">api-estoque</a></h2>
+<h2 align="center">LIKN da api no heroku <a href="https://api-estoque.herokuapp.com/" target="_blank">api-estoque</a></h2>
 
 <p align="center">Nessa live vimos o poder do <a href="https://www.prisma.io" target="_blank">PrismaIO</a> e os motivos para usarmos ele em nossas aplicações</p>
 
