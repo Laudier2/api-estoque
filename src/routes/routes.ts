@@ -65,6 +65,6 @@ router.put("/user", updateUser.handle);
 router.put("/useradress2put", updateUserAdress2.handle);
 router.delete("/user/:id", deleteUser.handle);
 router.delete("/adress2/:id", deleteAdress2.handle);
-router.get("/user", findUser.handle);
+router.get("/", findUser.handle);
 router.get("/user/:id", findUserId.handle);
 export { router };
