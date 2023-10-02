@@ -67,4 +67,5 @@ router.delete("/user/:id", deleteUser.handle);
 router.delete("/adress2/:id", deleteAdress2.handle);
 router.get("/", findUser.handle);
 router.get("/user/:id", findUserId.handle);
+
 export { router };

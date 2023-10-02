@@ -21,6 +21,8 @@ COPY ./prisma ./
 
 # Esse comando instala todas as dependencias do projeto, citada em package.jso
 RUN npm install
+RUN npm install prisma @prisma/client
+#RUN npx prisma migrate dev --name ts
 
 # Esse comando instala o @prisma/client
 #RUN npm install @prisma/client
@@ -42,7 +44,9 @@ RUN npm install
 COPY . .
 
 # Esse comando libera a porta que você dejeja usar
-EXPOSE ${PORT}
+EXPOSE 3001
+EXPOSE 3002
+EXPOSE 5432
 
 # Esse comando roda literalmente o nosso programa
 #CMD ["npm","run", "init"]
